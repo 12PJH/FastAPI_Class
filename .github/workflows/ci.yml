@@ -1,11 +1,11 @@
 name: CI
 
 on:
-  push: # Github에 Push할 때 마다 실행
+  push:
 
 jobs:
-  static-analtsis: # mypy, black, ruff 등 정적 분석
-    runs-on: ubuntu-22.04 # 운영 체제, 실제 프로덕션에서는 버전이 얘기치 못하게 올라가면서 장애를 내는 것을 막기 위해 버전을 고정하는 것이 좋다.
+  static-analysis:
+    runs-on: ubuntu-22.04
     steps:
       - name: Check out the codes
         uses: actions/checkout@v2
@@ -14,7 +14,7 @@ jobs:
         id: setup-python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.13'
+          python-version: "3.13"
 
       - name: Install Poetry
         run: |
@@ -37,7 +37,7 @@ jobs:
       - name: Run Mypy
         run: poetry run mypy .
 
-  test: # 전체 테스트 진행
+  test:
     runs-on: ubuntu-22.04
     steps:
       - name: Check out the codes
@@ -47,7 +47,7 @@ jobs:
         id: setup-python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.13'
+          python-version: "3.13"
 
       - name: Install Poetry
         run: |
@@ -59,7 +59,7 @@ jobs:
       - name: Install dependencies
         run: poetry install --no-root
 
-      - name: Run Tests
+      - name: Run tests
         run: |
           poetry run coverage run -m pytest .
           poetry run coverage report -m
