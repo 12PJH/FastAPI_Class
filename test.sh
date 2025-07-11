@@ -16,7 +16,7 @@ echo "OK"
 
 # Mypy 실행 후 완료 시 OK 출력
 echo "Starting Mypy"
-poetry run mypy .
+poetry run dmypy run -- .
 echo "OK"
 
 # Coverage 실행 후 완료 시 OK 출력
